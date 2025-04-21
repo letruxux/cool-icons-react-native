@@ -36,8 +36,14 @@ export const ${name} = (props) => (
 `;
 };
 
-const toPascalCase = (str) =>
-  str.replace(/(^\w|[-_]\w)/g, (s) => s.replace(/[-_]/, "").toUpperCase());
+const toPascalCase = (str) => {
+  const pascal = str.replace(/(^\w|[-_]\w)/g, (s) => s.replace(/[-_]/, "").toUpperCase());
+  // Add 'Icon' prefix to avoid conflicts with React Native components
+  if (["Svg", "Path", "React"].includes(pascal)) {
+    return `${pascal}Icon`;
+  }
+  return pascal;
+};
 
 async function downloadAndExtract() {
   try {
