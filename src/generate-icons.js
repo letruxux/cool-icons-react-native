@@ -92,6 +92,7 @@ import { SvgProps } from "react-native-svg";
 interface IconProps extends SvgProps {
   color?: string;
   size?: number;
+  children?: React.ReactNode;
 }
 declare const ${name}: (props: IconProps) => React.ReactElement<IconProps>;
 export { ${name} };`;
