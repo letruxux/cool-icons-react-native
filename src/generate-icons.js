@@ -20,7 +20,7 @@ import Svg, { Path } from "react-native-svg";
 export const ${name} = (props) => {
   const inner = \`${svgContent}\`
     .replace(/<svg[^>]*>/, "")
-    .replace(/<\/svg>/, "")
+    .replace(/<\\\/svg>/, "")
     .trim()
     .replace(/stroke="black"/g, 'stroke={props.color || "black"}');
 
