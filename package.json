@@ -1,0 +1,28 @@
+{
+  "name": "@letruxux/cool-icons-react-native",
+  "version": "0.1.0",
+  "main": "src/icons/components/index.js",
+  "scripts": {
+    "generate": "node src/generate-icons.js",
+    "postinstall": "npm run generate"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "icons",
+    "react-native",
+    "svg"
+  ],
+  "private": false,
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.1"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-native": "^0.79.1",
+    "react-native-svg": "^14.0.0",
+    "zip-lib": "^1.1.2"
+  }
+}
