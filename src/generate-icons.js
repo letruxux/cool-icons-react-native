@@ -83,15 +83,26 @@ async function generate() {
   await mkdir(outputDir, { recursive: true });
   const files = await readdir(inputDir);
   let indexContent = "";
+  let indexDtsContent = "";
   for (const file of files.filter((f) => f.endsWith(".svg"))) {
     const raw = await readFile(join(inputDir, file), "utf-8");
     const filen = basename(file, ".svg");
     const name = toPascalCase(filen);
     const content = template(name, raw);
     await writeFile(join(outputDir, `${filen}.jsx`), content);
+
+    // Generate TypeScript declaration
+    const dtsContent = `import * as React from "react";
+import { SvgProps } from "react-native-svg";
+declare const ${name}: (props: SvgProps) => React.ReactElement<SvgProps>;
+export { ${name} };`;
+    await writeFile(join(outputDir, `${filen}.d.ts`), dtsContent);
+
     indexContent += `export { ${name} } from "./${filen}";\n`;
+    indexDtsContent += `export { ${name} } from "./${filen}";\n`;
   }
   await writeFile(join(outputDir, "index.js"), indexContent);
+  await writeFile(join(outputDir, "index.d.ts"), indexDtsContent);
 
   await rmdir(inputDir, { recursive: true }).catch(() => {});
 }

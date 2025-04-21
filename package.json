@@ -1,7 +1,8 @@
 {
   "name": "@letruxux/cool-icons-react-native",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "src/icons/components/index.js",
+  "types": "src/icons/components/index.d.ts",
   "scripts": {
     "generate": "node src/generate-icons.js",
     "postinstall": "npm run generate"
