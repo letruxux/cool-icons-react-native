@@ -94,7 +94,7 @@ interface IconProps extends SvgProps {
   size?: number;
   children?: React.ReactNode;
 }
-declare const ${name}: (props: IconProps) => React.ReactElement<IconProps>;
+declare const ${name}: (props: IconProps) => React.JSX.Element;
 export { ${name} };`;
     await writeFile(join(outputDir, `${filen}.d.ts`), dtsContent);
 
