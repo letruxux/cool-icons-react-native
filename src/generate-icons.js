@@ -14,20 +14,22 @@ const zipUrl =
   "https://github.com/krystonschwarze/coolicons/releases/download/v4.1/coolicons.v4.1.zip";
 
 const template = (name, svgContent) => {
-  const inner = svgContent
-    .replace(/<svg[^>]*>/, "")
-    .replace(/<\/svg>/, "")
-    .trim()
-    .replace(/stroke=\"black\"/g, 'stroke={props.color || "black"}');
-
   return `import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
-export const ${name} = (props) => (
-  <Svg viewBox="0 0 24 24" fill="none" {...props}>
-    ${inner}
-  </Svg>
-);
+export const ${name} = (props) => {
+  const inner = \`${svgContent}\`
+    .replace(/<svg[^>]*>/, "")
+    .replace(/<\/svg>/, "")
+    .trim()
+    .replace(/stroke="black"/g, 'stroke={props.color || "black"}');
+
+  return (
+    <Svg viewBox="0 0 24 24" fill="none" {...props}>
+      {inner}
+    </Svg>
+  );
+};
 `;
 };
 
