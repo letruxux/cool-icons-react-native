@@ -22,12 +22,7 @@ const template = (name, svgContent) => {
 
   return `import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-/**
- * @typedef {import('react-native-svg').SvgProps} SvgProps
- * @typedef {import('react').ReactElement} ReactElement
- * @param {SvgProps} props
- * @returns {ReactElement}
- */
+
 export const ${name} = (props) => (
   <Svg viewBox="0 0 24 24" fill="none" {...props}>
     ${inner}
@@ -94,7 +89,11 @@ async function generate() {
     // Generate TypeScript declaration
     const dtsContent = `import * as React from "react";
 import { SvgProps } from "react-native-svg";
-declare const ${name}: (props: SvgProps) => React.ReactElement<SvgProps>;
+interface IconProps extends SvgProps {
+  color?: string;
+  size?: number;
+}
+declare const ${name}: (props: IconProps) => React.ReactElement<IconProps>;
 export { ${name} };`;
     await writeFile(join(outputDir, `${filen}.d.ts`), dtsContent);
 
